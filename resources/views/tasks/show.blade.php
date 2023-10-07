@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <title>Atividade</title>
   </head>
   <body>
     @include('nav')
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="pb-4 bg-white dark:bg-gray-900">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-5">
+        <div class="pb-4 bg-white dark:bg-gray-900 mt-5">
           <form action="/dashboard" method="GET">
             <div class="flex">
               <div class="relative mt-1">
@@ -66,7 +67,6 @@
             <tr>
               <th scope="col" class="px-6 py-4">{{ __("Título") }}</th>
               <th scope="col" class="px-6 py-4">{{ __("Descrição") }}</th>
-              <th scope="col" class="px-6 py-4">{{ __("Data") }}</th>
               <th scope="col" class="px-6 py-4">{{ __("Status") }}</th>
               <th
                 scope="col"
@@ -86,7 +86,6 @@
                 {{$task->title}}
               </th>
               <td class="px-6 py-4">{{$task->description}}</td>
-              <td class="px-6 py-4">{{$task->finish_date}}</td>
               <td class="px-6 py-4">
                 @if ($task->status === 'Ativa')
                 <span style="color: #86efac">{{$task->status}}</span>
@@ -95,9 +94,11 @@
                 @endif
               </td>
               <td class="px-6 py-4 flex items-center justify-center">
-                <a href="{{route('task.destroy', ['id' => $task->id])}}">
-                  Deletar
-                </a>
+                <form method="post" action="{{ route('task.destroy', [$task->id]) }}">
+                  @csrf @method('delete')
+
+                  <button>Deletar</button>
+                </form>
               </td>
             </tr>
             @endforeach
