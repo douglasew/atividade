@@ -1,8 +1,6 @@
 
 ## Instalação
 
-Instale my-project com npm
-
 ```bash
   docker run --rm \
     -u "$(id -u):$(id -g)" \
